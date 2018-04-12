@@ -34,7 +34,7 @@ const char *LoadConf::load_config = "\
 	return result\n\
 ";
 
-bool LoadConf::load_config(const char* config_file) {
+bool LoadConf::load_config_file(const char* config_file) {
     int err = luaL_loadbufferx(L, load_config, strlen(load_config), "=[skynet config]", "t");
     assert(err == LUA_OK);
     lua_pushstring(L, config_file);

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <assert.h>
 #include <string.h>
+#include "core/skynet_loadconf.h"
 
 using namespace std;
 
