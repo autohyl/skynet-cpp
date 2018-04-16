@@ -2,10 +2,13 @@ LUA_STATICLIB := 3rd/lua/liblua.a
 LUA_LIB ?= $(LUA_STATICLIB)
 LUA_INC ?= 3rd/lua/
 
+#$(LUA_STATICLIB):
+	#cd 3rd/lua && $(MAKE) CC='$(CC) -std=gnu99' linux
+
 SKYNET_SRC = skynet-src
 INC = -I./ -I$(LUA_INC) -I$(SKYNET_SRC)/core/
 LIB += $(LUA_STATICLIB) -ldl
-CFLAGS = -g
+CFLAGS = -g -std=c++0x
 
 TARGET = skynet
 
@@ -17,9 +20,6 @@ $(TARGET):$(SKYNET_OBJ)
 
 %.o:%.cpp
 	$(CXX) $(CFLAGS) $(INC) -c -o $@ $<
-
-$(LUA_STATICLIB):
-	cd 3rd/lua && $(MAKE) CC='$(CC) -std=gnu99' linux
 
 clean:
 	rm -f $(TARGET)

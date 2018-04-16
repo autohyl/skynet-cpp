@@ -45,6 +45,7 @@ int main(int argc, char ** argv) {
 		return 1;
 	}
 
+	#if 0
     struct lua_State *L = luaL_newstate();
 	luaL_openlibs(L);	// link lua lib
 
@@ -58,6 +59,10 @@ int main(int argc, char ** argv) {
 		lua_close(L);
 		return 1;
 	}
+	#endif
+
+	LoadConf load_conf;
+	load_conf.load_config_file(config_file);
 
     return 0;
 }
