@@ -4,7 +4,7 @@ LUA_INC ?= 3rd/lua/
 
 SKYNET_SRC = skynet-src
 INC = -I./ -I$(LUA_INC) -I$(SKYNET_SRC)/core/
-LIB += $(LUA_LIB) -ldl
+LIB += $(LUA_LIB) -ldl -lpthread
 CFLAGS = -g -std=c++0x
 
 TARGET = skynet

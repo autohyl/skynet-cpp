@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <string.h>
 #include "core/skynet_loadconf.h"
+#include "core/singletion.h"
 
 using namespace std;
 
@@ -45,24 +46,7 @@ int main(int argc, char ** argv) {
 		return 1;
 	}
 
-	#if 0
-    struct lua_State *L = luaL_newstate();
-	luaL_openlibs(L);	// link lua lib
-
-	int err =  luaL_loadbufferx(L, load_config, strlen(load_config), "=[skynet config]", "t");
-	assert(err == LUA_OK);
-	lua_pushstring(L, config_file);
-
-	err = lua_pcall(L, 1, 1, 0);
-	if (err) {
-		cerr << lua_tostring(L, -1) << endl;
-		lua_close(L);
-		return 1;
-	}
-	#endif
-
-	LoadConf load_conf;
-	load_conf.load_config_file(config_file);
+	Singletion<LoadConf>::install().load_config_file(config_file);
 
     return 0;
 }

@@ -33,7 +33,7 @@ public:
 private:
     static void init() {
         value_ = new T();
-        if (!detail::has_no_destroy::value) {
+        if (!detail::has_no_destroy<T>::value) {
             ::atexit(destroy);
         }
     }
