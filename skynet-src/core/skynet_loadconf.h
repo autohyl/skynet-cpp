@@ -1,5 +1,9 @@
+#ifndef __SKYNET_LOADCONF_H__
+#define __SKYNET_LOADCONF_H__
+
 #include <lua.hpp>
 #include <string>
+#include "singletion.h"
 
 struct skynet_config {
 	int thread;
@@ -12,22 +16,26 @@ struct skynet_config {
 	std::string logservice;
 };
 
-class LoadConf {
+class Skynet_LoadConfig {
 public:
-    LoadConf(struct lua_State *l) : L(l) {
+    Skynet_LoadConfig(struct lua_State *l) : L(l) {
         luaL_openlibs(L);	// link lua libs
         init();
     }
-    LoadConf() {
+    Skynet_LoadConfig() {
         L = luaL_newstate();
         luaL_openlibs(L);	// link lua libs
         init();
     }
-    ~LoadConf() {
+    ~Skynet_LoadConfig() {
         lua_close(L);
     }
     
     bool load_config_file(const char* config_file);
+
+    const skynet_config* getConfig() const {
+        return &config;
+    }
 
     template <class T>
     void set_opt(const char* key, T value);
@@ -40,3 +48,5 @@ private:
     static const char *load_config;
     struct skynet_config config;
 };
+
+#endif

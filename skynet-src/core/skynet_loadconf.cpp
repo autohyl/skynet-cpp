@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 
-const char *LoadConf::load_config = "\
+const char *Skynet_LoadConfig::load_config = "\
 	local result = {}\n\
 	local function getenv(name) return assert(os.getenv(name), [[os.getenv() failed: ]] .. name) end\n\
 	local sep = package.config:sub(1,1)\n\
@@ -35,7 +35,7 @@ const char *LoadConf::load_config = "\
 	return result\n\
 ";
 
-void LoadConf::init() {
+void Skynet_LoadConfig::init() {
     config.thread =  8;
 	config.module_path = "./cservice/?.so";
 	config.harbor = 1;
@@ -46,7 +46,7 @@ void LoadConf::init() {
 	config.profile = 1;
 }
 
-bool LoadConf::load_config_file(const char* config_file) {
+bool Skynet_LoadConfig::load_config_file(const char* config_file) {
     int err = luaL_loadbufferx(L, load_config, strlen(load_config), "=[skynet config]", "t");
     assert(err == LUA_OK);
     lua_pushstring(L, config_file);
@@ -86,7 +86,7 @@ bool LoadConf::load_config_file(const char* config_file) {
 }
 
 template <class T>
-void LoadConf::set_opt(const char* key, T value) {
+void Skynet_LoadConfig::set_opt(const char* key, T value) {
     std::stringstream os;
     os << value;
     std::string key_str = key;

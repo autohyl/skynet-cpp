@@ -10,7 +10,8 @@ CFLAGS = -g -std=c++0x
 TARGET = skynet
 
 SKYNET_OBJ = $(SKYNET_SRC)/skynet_main.o \
-	$(SKYNET_SRC)/core/skynet_loadconf.o
+	$(SKYNET_SRC)/core/skynet_loadconf.o \
+	$(SKYNET_SRC)/core/skynet_start.o
 
 $(TARGET):$(SKYNET_OBJ) $(LUA_LIB)
 	$(CXX) $(CFLAGS) $(INC) -o $@ $^ $(LIB)
